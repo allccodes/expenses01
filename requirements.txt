@@ -1,0 +1,6 @@
+babel
+beautifulsoup4
+requests
+flask
+lxml
+Flask-WTF
