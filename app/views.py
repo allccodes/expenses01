@@ -1,15 +1,13 @@
 from app import app
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 from results import Expenses
 from forms import RegistrationForm, LoginForm
 
-
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    #ex1 = Expenses()
-    #total = ex1.calcExpenses()
-    #return render_template('index.html', total=total)
+@app.route('/')
+@app.route('/home', methods=['GET', 'POST'])
+def home():
     return render_template('index.html')
+
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():
@@ -25,35 +23,28 @@ def aguas():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'admin@blog.com':
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login Unsucessful. Please check login/password', 'danger')
+    return render_template('aguas.html', form=form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash(f'Account created for  {form.username.data}!' , 'success')
+        flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('aguas'))
-    return render_template('register.html', form=form)
+    return render_template('register.html', title='Register', form=form)
+
+
 
 
 '''
-@app.route('/home', methods=['GET', 'POST'])
-def home():
-    return render_template('home.html', posts=posts)
-
-
-@app.route('/about', methods=['GET', 'POST'])
-def about():
-    return render_template('about.html', title='About')
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    return render_template('login.html', form=form)
-
-
 @app.route("/chart")
 def chart():
     bar_labels = labels
