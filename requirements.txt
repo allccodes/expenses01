@@ -4,4 +4,11 @@ requests
 flask
 lxml
 Flask-WTF
+psycopg2
 SQLAlchemy
+flask_sqlalchemy
+
+
+#https://www.compose.com/articles/using-postgresql-through-sqlalchemy/
+#https://postgresapp.com/documentation/configuration-python.html
+
