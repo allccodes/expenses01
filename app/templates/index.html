@@ -1,11 +1,18 @@
-{% extends 'starter.html'%}
+{% extends 'layout.html'%}
 {% block content %}
+    {% for post in posts %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+          </div>
+        </article>
+    {% endfor %}
 
+<!-- <center><h1 style="font-size:200px";>/</h1></center>-->
 
-<!-- <h1>Bootstrap starter template</h1>
-<p class="lead">Use this document as a way to quickly start any new project. <br> All you get is this text and a mostly barebones HTML document.</p> -->
-
-
-
-<center><h1 style="font-size:200px";>/</h1></center>
 {% endblock %}
